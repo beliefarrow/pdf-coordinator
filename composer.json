@@ -1,0 +1,24 @@
+{
+    "name": "skinoshita/pdf-coordinator",
+    "description": "",
+    "type": "library",
+    "keywords": ["pdf", "skinoshita"],
+    "require": {
+        "php": ">= 5.6.0",
+        "setasign/fpdi-fpdf": "^1.6",
+        "setasign/fpdi-tcpdf": "^1.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "SKinoshita\\PDFCoordinator\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shinya Kinoshita",
+            "role": "Developer",
+            "email": "contact@shinyakinoshita.com"
+        }
+    ]
+}
