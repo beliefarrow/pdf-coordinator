@@ -10,7 +10,7 @@
     },
     "autoload": {
         "psr-4": {
-            "SKinoshita\\PDFCoordinator\\": "src/"
+            "SKinoshita\\PDFCoordinator\\": "src/SKinoshita/PDFCoordinator/"
         }
     },
     "license": "MIT",
