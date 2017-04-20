@@ -26,5 +26,8 @@
 
     //$metadata = $metadataProvider->provide('template01');
     $metadata = $metadataProvider->merge('template01', $values);
-    $coordinator->coordinate($metadata);
+    $ret = $coordinator->coordinate($metadata);
+
+    echo $ret;
+
     exit;

@@ -1,6 +1,6 @@
 <?php
 /**
- * PDFCoordinator
+ * PDF Coordinator
  *
  * Copyright (c) Shinya Kinoshita (http://www.shinyakinoshita.com)
  *
@@ -8,25 +8,68 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Shinya Kinoshita (http://www.shinyakinoshita.com)
- * @link          http://www.shinyakinoshita.com PDFCordinator Project
- * @since         1.0.0
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ * @copyright Copyright (c) Shinya Kinoshita (http://www.shinyakinoshita.com)
+ * @link      http://www.shinyakinoshita.com PDFCordinator Project
+ * @since     1.0.0
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 namespace SKinoshita\PDFCoordinator\Core;
 
 /**
- * Main class for PDFCoordinator.
+ * Main class for PDF Coordinator.
  *
  * @author  Shinya Kinoshita <contact@shinyakinoshita.com>
  * @version 1.0.0
  */
 class Coordinator
 {
+    /**
+     * Destination type for PDF Output (Browser Preview).
+     *
+     * @var string Destination type for PDF Output (Browser Preview)
+     */
+    const DESTINATION_TYPE_PREVIEW  = 'I';
+
+    /**
+     * Destination type for PDF Output (Browser Download).
+     *
+     * @var string Destination type for PDF Output (Browser Download)
+     */
+    const DESTINATION_TYPE_DOWNLOAD = 'D';
+
+    /**
+     * Destination type for PDF Output (File).
+     *
+     * @var string Destination type for PDF Output (File)
+     */
+    const DESTINATION_TYPE_FILE     = 'F';
+
+    /**
+     * Destination type for PDF Output (String).
+     *
+     * @var string Destination type for PDF Output (String)
+     */
+    const DESTINATION_TYPE_STRING   = 'S';
+
+    /**
+     * The path for base pdf.
+     *
+     * @var string The path for base pdf
+     */
     private $templateDirectoryPath = '';
 
+    /**
+     * The path for pdf you want to save.
+     *
+     * @var string The path for pdf you want to save
+     */
     private $outputDirectoryPath   = '';
 
+    /**
+     * FPDI Object.
+     *
+     * @var \FPDI FPDI Object
+     */
     private $pdf = null;
 
     /**
@@ -50,9 +93,12 @@ class Coordinator
      *
      * Based on metadata of PDF, it regenerates PDF file.
      *
-     * @param  array $metadata metadata for PDF
+     * @param  array         $metadata        metadata for PDF
+     * @param  string        $destinationType Destination type for PDF Output
+     * @return string | void String of pdf content when you chose $destinationType for DESTINATION_TYPE_STRING
+     *                       void when you chose $destinationType for except DESTINATION_TYPE_STRING
      */
-    public function coordinate($metadata)
+    public function coordinate($metadata, $destinationType = self::DESTINATION_TYPE_STRING)
     {
         // Get a base pdf from metadata.
         $fontSettings      = $metadata['font-settings'];
@@ -96,6 +142,6 @@ class Coordinator
         }
 
         $filePath = $this->outputDirectoryPath . '/' . uniqid() . '.pdf';
-        $this->pdf->Output($filePath, 'F');
+        return $this->pdf->Output($filePath, $destinationType);
     }
 }

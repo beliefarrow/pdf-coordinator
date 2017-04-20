@@ -1,6 +1,6 @@
 <?php
 /**
- * PDFCoordinator
+ * PDF Coordinator
  *
  * Copyright (c) Shinya Kinoshita (http://www.shinyakinoshita.com)
  *
@@ -8,15 +8,15 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Shinya Kinoshita (http://www.shinyakinoshita.com)
- * @link          http://www.shinyakinoshita.com PDFCordinator Project
- * @since         1.0.0
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ * @copyright Copyright (c) Shinya Kinoshita (http://www.shinyakinoshita.com)
+ * @link      http://www.shinyakinoshita.com PDFCordinator Project
+ * @since     1.0.0
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
- namespace SKinoshita\PDFCoordinator\Provider;
+namespace SKinoshita\PDFCoordinator\Provider;
 
 /**
- * Metadata Provider for PDFCoordinator.
+ * Metadata Provider for PDF Coordinator.
  *
  * @author  Shinya Kinoshita <contact@shinyakinoshita.com>
  * @version 1.0.0
