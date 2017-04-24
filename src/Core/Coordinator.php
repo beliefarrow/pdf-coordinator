@@ -135,9 +135,16 @@ class Coordinator
                                       $coordinatingFontSettings['font-color']['blue'] : $fontSettings['font-color']['blue'];
                 $this->pdf->SetTextColor($fontColorRed, $fontColorGreen, $fontColorBlue);
 
-                $this->pdf->SetXY($coordinatingAttributes['position']['x'], $coordinatingAttributes['position']['y']);
+                $positionX = $coordinatingAttributes['position']['x'];
+                $positionY = $coordinatingAttributes['position']['y'];
+                $value     = $coordinatingAttributes['value'];
 
-                $this->pdf->Write(0, $coordinatingAttributes['value']);
+                if (isset($coordinatingAttributes['width'])) {
+                  $this->pdf->writeHTMLCell($coordinatingAttributes['width'], 1, $positionX, $positionY, $value);
+                } else {
+                  $this->pdf->SetXY($positionX, $positionY);
+                  $this->pdf->Write(0, $value);
+                }
             }
         }
 
