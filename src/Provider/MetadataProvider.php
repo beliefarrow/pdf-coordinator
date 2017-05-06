@@ -39,31 +39,36 @@ class MetadataProvider
      * Get metadata.
      *
      * @param  string $key  File key of metadata for PDF that you cordinate
+     * @param  array  $values Values you want to combine into metadata
      * @return array  Metadata for PDF
      */
-    public function provide($key)
+    public function provide($key, $values = [])
     {
         // Get metadata for pdf from file.
         $target   = file_get_contents($this->metadataDirectoryPath . '/' . $key . '.json');
         $metadata = json_decode($target, true);
 
+        // Combine values if variable named '$values' is not empty.
+        if (empty($values)) {
+            $metadata = $this->combine($metadata, $values);
+        }
+
         return $metadata;
     }
 
     /**
-     * Merge metadata from file with value you indicate.
+     * Combine values into metadata.
      *
-     * @param  string $key    File key of metadata for PDF that you cordinate
-     * @param  array  $values Values you want to merge with metadata
-     * @return array  merged metadata
+     * @param  string $metadata Metadata for PDF
+     * @param  array  $values   Values you want to combine into metadata you indicate
+     * @return array  Combined metadata
      */
-    public function merge($key, $values)
+    public function combine($metadata, $values)
     {
-        $metadata          = $this->provide($key);
         $coordinatingPages = $metadata['coordinating-pages'];
 
         foreach ($coordinatingPages as $pageKey => $pageAttributes) {
-            $coordinatingItems  = $pageAttributes['coordinating-items'];
+            $coordinatingItems = $pageAttributes['coordinating-items'];
 
             foreach ($coordinatingItems as $coordinatingKey => $coordinatingAttributes) {
                 if (isset($values[$pageKey][$coordinatingKey])) {
@@ -74,5 +79,22 @@ class MetadataProvider
         }
 
         return $metadata;
+    }
+
+    /**
+     * Copy the attribute of the specified page to the target metadata.
+     *
+     * @param  array   $metadata Metadata for PDF
+     * @param  integer $page     Page number you want to copy
+     * @return array   Metadata that has completely copied
+     */
+    public function copyPageAttribute($metadata, $page = 1)
+    {
+        $newMetadata       = $metadata;
+        $coordinatingPages = $metadata['coordinating-pages'];
+
+        $newMetadata['page' . $page + 1] = $coordinatingPages['page' . $page];
+
+        return $newMetadata;
     }
 }

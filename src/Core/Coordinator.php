@@ -140,10 +140,10 @@ class Coordinator
                 $value     = $coordinatingAttributes['value'];
 
                 if (isset($coordinatingAttributes['width'])) {
-                  $this->pdf->writeHTMLCell($coordinatingAttributes['width'], 1, $positionX, $positionY, $value);
+                   $this->pdf->writeHTMLCell($coordinatingAttributes['width'], 1, $positionX, $positionY, $value);
                 } else {
-                  $this->pdf->SetXY($positionX, $positionY);
-                  $this->pdf->Write(0, $value);
+                   $this->pdf->SetXY($positionX, $positionY);
+                   $this->pdf->Write(0, $value);
                 }
             }
         }
