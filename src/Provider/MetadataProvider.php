@@ -49,7 +49,7 @@ class MetadataProvider
         $metadata = json_decode($target, true);
 
         // Combine values if variable named '$values' is not empty.
-        if (empty($values)) {
+        if (!empty($values)) {
             $metadata = $this->combine($metadata, $values);
         }
 
