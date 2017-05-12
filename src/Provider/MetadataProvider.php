@@ -10,7 +10,7 @@
  *
  * @copyright Copyright (c) Shinya Kinoshita (http://www.shinyakinoshita.com)
  * @link      http://www.shinyakinoshita.com PDFCordinator Project
- * @since     1.0.0
+ * @since     0.1.0
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 namespace SKinoshita\PDFCoordinator\Provider;
@@ -19,10 +19,15 @@ namespace SKinoshita\PDFCoordinator\Provider;
  * Metadata Provider for PDF Coordinator.
  *
  * @author  Shinya Kinoshita <contact@shinyakinoshita.com>
- * @version 1.0.0
+ * @version 0.1.0
  */
 class MetadataProvider
 {
+    /**
+     * Directory Path for Metadata.
+     *
+     * @var string The path for metadata
+     */
     private $metadataDirectoryPath = '';
 
     /**

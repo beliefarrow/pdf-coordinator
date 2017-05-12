@@ -10,7 +10,7 @@
  *
  * @copyright Copyright (c) Shinya Kinoshita (http://www.shinyakinoshita.com)
  * @link      http://www.shinyakinoshita.com PDFCordinator Project
- * @since     1.0.0
+ * @since     0.1.0
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 namespace SKinoshita\PDFCoordinator\Core;
@@ -19,7 +19,7 @@ namespace SKinoshita\PDFCoordinator\Core;
  * Main class for PDF Coordinator.
  *
  * @author  Shinya Kinoshita <contact@shinyakinoshita.com>
- * @version 1.0.0
+ * @version 0.1.0
  */
 class Coordinator
 {
@@ -102,12 +102,17 @@ class Coordinator
     {
         // Get a base pdf from metadata.
         $fontSettings      = $metadata['font-settings'];
+        $title             = isset($metadata['title']) ? $metadata['title'] : '';
+        $filename          = isset($metadata['filename']) ? $metadata['filename'] : uniqid() . '.pdf';
         $coordinatingPages = $metadata['coordinating-pages'];
 
+        $this->pdf->SetTitle($title);
+
+        // Write items into pdf.
         foreach ($coordinatingPages as $pageKey => $pageAttributes) {
-            $originalForm       = $this->templateDirectoryPath . '/' . $pageAttributes['original-form'];
-            $targetPage         = $pageAttributes['target-page'];
-            $coordinatingItems  = $pageAttributes['coordinating-items'];
+            $originalForm      = $this->templateDirectoryPath . '/' . $pageAttributes['original-form'];
+            $targetPage        = $pageAttributes['target-page'];
+            $coordinatingItems = $pageAttributes['coordinating-items'];
 
             $this->pdf->AddPage();
 
@@ -148,7 +153,7 @@ class Coordinator
             }
         }
 
-        $filePath = $this->outputDirectoryPath . '/' . uniqid() . '.pdf';
+        $filePath = $destinationType == self::DESTINATION_TYPE_FILE ? $this->outputDirectoryPath . '/' . $filename : $filename;
         return $this->pdf->Output($filePath, $destinationType);
     }
 }
