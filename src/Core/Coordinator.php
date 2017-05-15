@@ -142,7 +142,12 @@ class Coordinator
 
                 $positionX = $coordinatingAttributes['position']['x'];
                 $positionY = $coordinatingAttributes['position']['y'];
+
                 $value     = $coordinatingAttributes['value'];
+
+                if (isset($coordinatingAttributes['value-items'])) {
+                    $value = $coordinatingAttributes['value-items'][$value];
+                }
 
                 if (isset($coordinatingAttributes['width'])) {
                    $this->pdf->writeHTMLCell($coordinatingAttributes['width'], 1, $positionX, $positionY, $value);
