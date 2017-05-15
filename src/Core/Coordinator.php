@@ -145,7 +145,7 @@ class Coordinator
 
                 $value     = $coordinatingAttributes['value'];
 
-                if (isset($coordinatingAttributes['value-items'])) {
+                if (isset($coordinatingAttributes['value-items'][$value])) {
                     $value = $coordinatingAttributes['value-items'][$value];
                 }
 
